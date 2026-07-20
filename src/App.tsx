@@ -12,6 +12,9 @@ import {
   Square,
   Sparkles,
   ArrowRight,
+  ArrowLeft,
+  ArrowDown,
+  ArrowUp,
   Sun,
   Moon
 } from 'lucide-react';
@@ -1070,6 +1073,92 @@ export default function App() {
               </AnimatePresence>
             </div>
           </motion.div>
+
+          {/* Touch-Friendly Tactile Keyboard Solver Pad */}
+          <div 
+            id="touch-control-pad" 
+            className={`w-full max-w-[460px] mt-4 p-3 border transition-all duration-300 select-none ${
+              darkMode 
+                ? 'bg-neutral-900/60 border-neutral-800 text-neutral-100 shadow-[2px_2px_12px_rgba(0,0,0,0.5)]' 
+                : 'bg-white border-black text-black shadow-sm'
+            }`}
+          >
+            <div className={`flex justify-between items-center text-[9px] font-bold uppercase tracking-widest mb-2 px-1 border-b pb-1 border-dashed ${
+              darkMode ? 'border-neutral-800 text-neutral-500' : 'border-neutral-200 text-neutral-400'
+            }`}>
+              <span>Solver Input Pad</span>
+              <span className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping" />
+                <span>Touch Ready</span>
+              </span>
+            </div>
+            
+            <div className="grid grid-cols-4 gap-2">
+              {/* Left Button */}
+              <button
+                id="ctrl-left"
+                onClick={() => {
+                  moveHorizontally(-1);
+                }}
+                className={`py-3 px-1.5 flex flex-col items-center justify-center font-bold text-xs uppercase cursor-pointer border transition-all active:translate-y-0.5 active:shadow-none select-none touch-manipulation ${
+                  darkMode 
+                    ? 'bg-neutral-900 border-neutral-700 text-neutral-100 hover:bg-neutral-800 shadow-[3px_3px_0px_#111]' 
+                    : 'bg-neutral-50 border-black text-black hover:bg-neutral-100 shadow-[3px_3px_0px_#000]'
+                }`}
+              >
+                <ArrowLeft className="w-5 h-5 mb-1" />
+                <span className="text-[8px] md:text-[9px] tracking-wider">LEFT (A)</span>
+              </button>
+
+              {/* Soft Drop Button */}
+              <button
+                id="ctrl-soft"
+                onClick={() => {
+                  moveDown();
+                }}
+                className={`py-3 px-1.5 flex flex-col items-center justify-center font-bold text-xs uppercase cursor-pointer border transition-all active:translate-y-0.5 active:shadow-none select-none touch-manipulation ${
+                  darkMode 
+                    ? 'bg-neutral-900 border-neutral-700 text-neutral-100 hover:bg-neutral-800 shadow-[3px_3px_0px_#111]' 
+                    : 'bg-neutral-50 border-black text-black hover:bg-neutral-100 shadow-[3px_3px_0px_#000]'
+                }`}
+              >
+                <ArrowDown className="w-5 h-5 mb-1" />
+                <span className="text-[8px] md:text-[9px] tracking-wider">SOFT (S)</span>
+              </button>
+
+              {/* Hard Drop Button */}
+              <button
+                id="ctrl-hard"
+                onClick={() => {
+                  hardDrop();
+                }}
+                className={`py-3 px-1.5 flex flex-col items-center justify-center font-bold text-xs uppercase cursor-pointer border transition-all active:translate-y-0.5 active:shadow-none select-none touch-manipulation ${
+                  darkMode 
+                    ? 'bg-neutral-900 border-neutral-700 text-amber-400 hover:bg-neutral-800 shadow-[3px_3px_0px_#111]' 
+                    : 'bg-neutral-50 border-black text-amber-600 hover:bg-neutral-100 shadow-[3px_3px_0px_#000]'
+                }`}
+              >
+                <ArrowUp className="w-5 h-5 mb-1 animate-bounce" style={{ animationDuration: '2s' }} />
+                <span className="text-[8px] md:text-[9px] tracking-wider font-extrabold text-amber-500">DROP (W)</span>
+              </button>
+
+              {/* Right Button */}
+              <button
+                id="ctrl-right"
+                onClick={() => {
+                  moveHorizontally(1);
+                }}
+                className={`py-3 px-1.5 flex flex-col items-center justify-center font-bold text-xs uppercase cursor-pointer border transition-all active:translate-y-0.5 active:shadow-none select-none touch-manipulation ${
+                  darkMode 
+                    ? 'bg-neutral-900 border-neutral-700 text-neutral-100 hover:bg-neutral-800 shadow-[3px_3px_0px_#111]' 
+                    : 'bg-neutral-50 border-black text-black hover:bg-neutral-100 shadow-[3px_3px_0px_#000]'
+                }`}
+              >
+                <ArrowRight className="w-5 h-5 mb-1" />
+                <span className="text-[8px] md:text-[9px] tracking-wider">RIGHT (D)</span>
+              </button>
+            </div>
+          </div>
         </section>
 
         {/* Right Column: Level Ledger, Target Word checklist, and Controls (Narrower) */}
